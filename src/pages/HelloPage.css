@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Roboto&display=swap');
+
+.hello-page-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #065f46, #16a34a, #064e3b);
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 2rem;
+    text-align: center;
+    overflow: hidden;
+}
+
+.hello-title {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #ffffff;
+    text-shadow: 0 0 8px #00000080;
+}
+
+.hello-subtitle {
+    font-size: 1.2rem;
+    margin: 1rem 0 2rem;
+    font-family: 'Roboto', sans-serif;
+    max-width: 500px;
+    color: #e0ffe0;
+}
+
+.hello-btn {
+    background-color: #10b981;
+    padding: 0.75rem 2rem;
+    border-radius: 9999px;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+.login-btn {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    background-color: #dc2626;
+    color: white;
+    padding: 0.5rem 1.25rem;
+    border-radius: 0 1.5rem 1.5rem 0;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.hover\:glow-green:hover {
+    box-shadow: 0 0 15px 4px #34d399;
+}
+
+.hover\:glow-red:hover {
+    box-shadow: 0 0 15px 4px #f87171;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fadeInUp {
+    animation: fadeInUp 1s ease-out;
+}
+
+.animate-bounce {
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
