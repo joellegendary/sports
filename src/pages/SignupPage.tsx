@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const SignupPage: React.FC = () => {
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
   const [error, setError] = useState("");
+
   const navigate = useNavigate();
+  const { allow } = useAuth();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -15,6 +19,14 @@ const SignupPage: React.FC = () => {
       setError("Passwords do not match");
       return;
     }
+
+    const userData = { email, name };
+
+    // Save user info in localStorage using email as key
+    localStorage.setItem(email, JSON.stringify(userData));
+
+    // Set user in auth context
+    allow(userData);
 
     alert("Signup successful!");
     navigate("/home");
@@ -30,6 +42,14 @@ const SignupPage: React.FC = () => {
         {error && <p className="text-red-600 text-sm mb-2">{error}</p>}
 
         <form onSubmit={handleSubmit} className="space-y-4">
+          <input
+            type="text"
+            placeholder="Full Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+            className="w-full px-4 py-2 rounded-lg border border-green-200 bg-white/60 placeholder-green-700"
+          />
           <input
             type="email"
             placeholder="Email"

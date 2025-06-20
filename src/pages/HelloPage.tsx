@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "./HelloPage.css";
+import "./css/HelloPage.css";
 
 const HelloPage: React.FC = () => {
   return (
@@ -11,7 +11,7 @@ const HelloPage: React.FC = () => {
         </p>
 
         <Link
-          to="/signup"
+          to="/Login"
           className="hello-btn hover:glow-green"
           aria-label="Enter Sports Zone"
         >

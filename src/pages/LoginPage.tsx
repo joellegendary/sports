@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -8,22 +9,32 @@ const LoginPage: React.FC = () => {
   const [status, setStatus] = useState<"idle" | "logging" | "success">("idle");
 
   const navigate = useNavigate();
+  const { allow } = useAuth();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("logging");
     setError("");
 
-    // Simulate successful login
     setTimeout(() => {
-      if (email && password) {
-        setStatus("success");
-        alert("You have now logged in to your account");
-        navigate("/home"); // Redirect to HomePage
-      } else {
-        setError("Invalid email or password");
-        setStatus("idle");
+      const storedData = localStorage.getItem(email.trim());
+
+      if (storedData) {
+        const parsedUser = JSON.parse(storedData);
+        if (
+          parsedUser.email === email.trim() &&
+          parsedUser.password === password.trim()
+        ) {
+          allow({ email: parsedUser.email, name: parsedUser.name });
+          setStatus("success");
+          alert(`Welcome back, ${parsedUser.name}!`);
+          navigate("/home");
+          return;
+        }
       }
+
+      setError("Invalid email or password");
+      setStatus("idle");
     }, 1000);
   };
 
@@ -33,7 +44,6 @@ const LoginPage: React.FC = () => {
         <h2 className="text-2xl font-bold text-green-800 mb-6 text-center">
           Login
         </h2>
-
         <form className="space-y-4" onSubmit={handleSubmit}>
           <input
             type="email"
@@ -51,9 +61,7 @@ const LoginPage: React.FC = () => {
             className="w-full px-4 py-2 rounded-xl border border-green-200 bg-white/50 placeholder-green-700"
             required
           />
-
           {error && <p className="text-red-600 text-sm">{error}</p>}
-
           <button
             type="submit"
             disabled={status === "logging"}
@@ -66,7 +74,6 @@ const LoginPage: React.FC = () => {
             {status === "logging" ? "Logging in..." : "Submit"}
           </button>
         </form>
-
         <div className="mt-4 text-center">
           <p className="text-sm text-green-800">Don’t have an account?</p>
           <button
