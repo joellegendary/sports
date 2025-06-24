@@ -98,7 +98,9 @@ const SportsSearchBar: React.FC = () => {
     try {
       const url =
         searchType === "event"
-          ? `https://www.thesportsdb.com/api/v1/json/3/searchevents.php?e=Arsenal_vs_Chelsea&s=2016-2017`
+          ? `https://www.thesportsdb.com/api/v1/json/3/searchevents.php?e=${encodeURIComponent(
+              searchInput
+            )}&s=${encodeURIComponent(seasonInput)}`
           : `https://www.thesportsdb.com/api/v1/json/3/searchplayers.php?p=${encodeURIComponent(
               searchInput
             )}`;
@@ -110,7 +112,8 @@ const SportsSearchBar: React.FC = () => {
         setEvents(data.event || []);
         setPlayers([]);
       } else {
-        setPlayers(data.player || []);
+        const playersData = data.player || data.players || [];
+        setPlayers(playersData);
         setEvents([]);
       }
 

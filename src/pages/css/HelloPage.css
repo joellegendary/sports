@@ -19,7 +19,8 @@
     font-size: 3rem;
     font-weight: 800;
     color: #ffffff;
-    text-shadow: 0 0 8px #00000080;
+    text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+    animation: bounce 2s infinite;
 }
 
 .hello-subtitle {
@@ -77,18 +78,18 @@
     animation: fadeInUp 1s ease-out;
 }
 
-.animate-bounce {
-    animation: bounce 2s infinite;
-}
-
 @keyframes bounce {
 
     0%,
     100% {
-        transform: translateY(0px);
+        transform: translateY(0);
     }
 
     50% {
         transform: translateY(-10px);
     }
+}
+
+.animate-bounce {
+    animation: bounce 2s infinite;
 }

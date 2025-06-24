@@ -1,19 +1,20 @@
+import React from "react";
 import { Link } from "react-router-dom";
-import "./css/HelloPage.css";
 
 const HelloPage: React.FC = () => {
   return (
-    <div className="hello-page-container">
-      <div className="hello-content animate-fadeInUp">
-        <h1 className="hello-title animate-bounce">THE SPORTS ZONE</h1>
-        <p className="hello-subtitle">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-green-950 text-white px-4">
+      <div className="text-center animate-fadeInUp space-y-6">
+        <h1 className="text-4xl md:text-6xl font-extrabold text-green-300 animate-bounce">
+          THE SPORTS ZONE
+        </h1>
+        <p className="text-lg md:text-xl text-green-100">
           Your ultimate destination for sports updates, stats, and excitement.
         </p>
 
         <Link
-          to="/Login"
-          className="hello-btn hover:glow-green"
-          aria-label="Enter Sports Zone"
+          to="/login"
+          className="inline-block bg-green-600 hover:bg-green-500 text-white font-semibold px-6 py-3 rounded-full transition duration-300 shadow-md hover:shadow-green-400"
         >
           Enter Sports Zone
         </Link>
@@ -21,8 +22,7 @@ const HelloPage: React.FC = () => {
 
       <Link
         to="/signup"
-        className="login-btn hover:glow-red"
-        aria-label="Signup"
+        className="mt-6 text-sm bg-red-600 hover:bg-red-500 text-white font-semibold px-4 py-2 rounded-full transition duration-300 shadow hover:shadow-red-400"
       >
         Signup
       </Link>

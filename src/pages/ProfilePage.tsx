@@ -1,10 +1,10 @@
 import React from "react";
 import { useAuth } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { X } from "lucide-react";
 
 const ProfilePage: React.FC = () => {
-  const { user, logout } = useAuth();
-  const navigate = useNavigate();
+  const { user } = useAuth();
 
   if (!user) {
     return (
@@ -16,14 +16,24 @@ const ProfilePage: React.FC = () => {
     );
   }
 
-  const handleLogout = () => {
-    logout();
-    navigate("/login"); // or wherever your login page is
-  };
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-100 to-green-300">
-      <div className="bg-white/30 backdrop-blur-md rounded-xl p-8 shadow-lg w-full max-w-sm">
+      <div className="relative bg-white/30 backdrop-blur-md rounded-xl p-8 shadow-lg w-full max-w-sm">
+        {/* X icon as a Link to HomePage */}
+        <Link
+          to="/Home"
+          className="absolute top-4 right-4 text-gray-700 hover:text-red-500 transition"
+        >
+          <X size={24} />
+        </Link>
+
+        {/* User Icon */}
+        <div className="flex justify-center mb-6">
+          <div className="w-24 h-24 bg-green-600 text-white rounded-full flex items-center justify-center text-4xl font-bold shadow-md">
+            {user.name?.charAt(0).toUpperCase() || "U"}
+          </div>
+        </div>
+
         <h2 className="text-2xl font-bold text-green-800 mb-6 text-center">
           Your Profile
         </h2>
@@ -34,13 +44,6 @@ const ProfilePage: React.FC = () => {
         <p className="text-green-900 mb-6">
           Email: <strong>{user.email}</strong>
         </p>
-
-        <button
-          onClick={handleLogout}
-          className="w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition"
-        >
-          Log Out
-        </button>
       </div>
     </div>
   );

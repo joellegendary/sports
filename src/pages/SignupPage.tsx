@@ -20,10 +20,10 @@ const SignupPage: React.FC = () => {
       return;
     }
 
-    const userData = { email, name };
+    const userData = { email: email.trim(), name, password };
 
     // Save user info in localStorage using email as key
-    localStorage.setItem(email, JSON.stringify(userData));
+    localStorage.setItem(email.trim(), JSON.stringify(userData));
 
     // Set user in auth context
     allow(userData);
